@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Register</h1>
+    <form method="POST"
+          th:action="@{/vrUser/register}"
+          th:object="${vrUser}">
+        <div th:replace="fragments/input :: input('text', 'First Name', 'firstName')"/>
+        <div th:replace="fragments/input :: input('text', 'Last Name', 'lastName')"/>
+        <div th:replace="fragments/input :: input('text', 'User Name', 'userName')"/>
+        <div th:replace="fragments/input :: input('password', 'Password', 'password')"/>
+        <br/>
+        <div class="form-row">
+            <button class="btn btn-primary" type="submit">Register</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

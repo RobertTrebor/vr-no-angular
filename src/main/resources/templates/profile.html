@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Register</h1>
+    <!--/*@thymesVar id="vrUser" type="de.lengsfeld.apps.vr.entity.VrUser"*/-->
+    <h2 th:text="${'Hello ' + vrUser.firstName}">Firstname</h2>
+</div>
+</body>
+</html>
