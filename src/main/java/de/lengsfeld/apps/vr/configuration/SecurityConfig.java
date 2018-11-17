@@ -1,4 +1,4 @@
-package de.lengsfeld.apps.vr.Configuration;
+package de.lengsfeld.apps.vr.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,8 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
+    //@Override
+    protected void normal_configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
                 .antMatchers("/cemeteries**/*").authenticated()
                 .antMatchers("/cemeteries").authenticated()
@@ -21,6 +21,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .formLogin();
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        System.out.println("configure");
+        http.csrf().disable();
+        http.authorizeRequests().antMatchers("/").permitAll();
     }
 
 }

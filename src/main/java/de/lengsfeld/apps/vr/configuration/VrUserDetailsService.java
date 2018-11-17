@@ -1,4 +1,4 @@
-package de.lengsfeld.apps.vr.Configuration;
+package de.lengsfeld.apps.vr.configuration;
 
 
 import de.lengsfeld.apps.vr.entity.VrUser;
@@ -11,19 +11,27 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
 public class VrUserDetailsService implements UserDetailsService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public VrUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<VrUser> userOptional = userRepository.findByUserName(userName);
-        VrUser vrUser = userOptional.get();
-        return new User(vrUser.getUserName(), vrUser.getPassword(), new ArrayList<>());
+        VrUser vrUser = null;
+        if (userOptional.isPresent()) {
+            vrUser = userOptional.get();
+        }
+        return new User(Objects.requireNonNull(vrUser).getUserName(), vrUser.getPassword(), new ArrayList<>());
     }
 
 }

@@ -13,15 +13,21 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableSwagger2
 @EnableScheduling
 @EnableCaching
 @Slf4j
 public class VrApplication {
 
+    private final CemeteryRepository cemeteryRepository;
+
     @Autowired
-    private CemeteryRepository cemeteryRepository;
+    public VrApplication(CemeteryRepository cemeteryRepository) {
+        this.cemeteryRepository = cemeteryRepository;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(VrApplication.class, args);

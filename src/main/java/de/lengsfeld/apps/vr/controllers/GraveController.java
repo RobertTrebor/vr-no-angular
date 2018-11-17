@@ -8,11 +8,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/restgraves")
+@RequestMapping("/graves")
 public class GraveController {
 
+    private final GraveRepository graveRepository;
+
     @Autowired
-    private GraveRepository graveRepository;
+    public GraveController(GraveRepository graveRepository) {
+        this.graveRepository = graveRepository;
+    }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<Grave> getAllGraves() {

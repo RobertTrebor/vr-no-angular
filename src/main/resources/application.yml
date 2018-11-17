@@ -44,8 +44,18 @@ spring:
     drop-first: false
 
 ---
+#spring:
+#  security:
+#    user:
+#      name: user
+#      password: password
 spring:
   security:
-    user:
-      name: user
-      password: password
+    basic:
+      enabled: false
+      ignored: /**
+  management:
+    security:
+      enabled: false
+
+
